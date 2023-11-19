@@ -1,0 +1,578 @@
+<?xml version = "1.0"?>
+<robot name="onshape" xmlns:xacro="http://www.ros.org/wiki/xacro">
+	<!-- This first link called "world" is empty -->
+	<link name="world"></link>
+	<!-- A simple fixed joint from our empty world link, to our base. -->
+	<!-- The base origin is offset from the world origin. -->
+	<!-- This joint and the world link above should be commented out in real simulations -->
+	<!-- After fixing the floppy nature of the robot of couse :) (prob inertial tags) -->
+	<joint name="root_joint" type="fixed">
+		<origin xyz="0 0 0.2" rpy="0 0 0"/>
+		<parent link="world"/>
+		<child link="root"/>
+	</joint>
+	<!-- <link name = "base_link"/> -->
+	<link name="root"> <!-- This link is named root to comply with ROS2 naming conventions, but is actually the body -->
+		<visual>
+			<origin xyz="-1.3877787807814456755e-17 2.268044627227321576e-18 -0.02" rpy="-1.307114139148519018e-15 -8.6042284408450440465e-16 -1.5707963267948943376" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/body.stl"/>
+			</geometry>
+			<material name="body_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="-1.3877787807814456755e-17 2.268044627227321576e-18 -0.019999999999999996947" rpy="-1.307114139148519018e-15 -8.6042284408450440465e-16 -1.5707963267948943376" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/body.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-2.1278817631231474637e-17 -3.1198668423814016482e-18 -0.0099999999999999568401" rpy="0 0 0"/>
+			<mass value="0.27501886641472944595" />
+			<inertia ixx="0.00013588878231084592957" ixy="-1.9478911643668652483e-18"  ixz="-1.3217713434262069241e-18" iyy="0.00075777043457423689729" iyz="-1.4051522964996202707e-18" izz="0.00087532462579078846188" />
+		</inertial>
+	</link>
+	<link name="coxa">
+		<visual>
+			<origin xyz="-6.9388939039072283776e-18 0 0.010000000000000000208" rpy="3.141592653589793116 3.2457138953322440927e-32 -4.2656265330346627126e-32" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/coxa.stl"/>
+			</geometry>
+			<material name="coxa_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="-6.9388939039072283776e-18 0 0.010000000000000000208" rpy="3.141592653589793116 3.2457138953322440927e-32 -4.2656265330346627126e-32" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/coxa.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.0098878038941457562644 7.7413528037404820582e-19 -3.4694469519536141888e-18" rpy="0 0 0"/>
+			<mass value="0.0066122388678941153989" />
+			<inertia ixx="6.8894459355149516998e-07" ixy="1.3661848702939090722e-38"  ixz="1.0027036334200111901e-39" iyy="1.2166590501427852292e-06" iyz="-3.780857738447097007e-37" izz="6.3103311382374083454e-07" />
+		</inertial>
+	</link>
+	<link name="femur">
+		<visual>
+			<origin xyz="0 0 0.010000000000000001943" rpy="1.570796326794896558 2.3595300293079823815e-31 8.9515170786311406891e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/femur.stl"/>
+			</geometry>
+			<material name="femur_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.010000000000000001943" rpy="1.570796326794896558 2.3595300293079823815e-31 8.9515170786311406891e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/femur.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.026510642456918004362 1.7833050232840718683e-18 -1.7347234759768007388e-18" rpy="0 0 0"/>
+			<mass value="0.013450238867894117462" />
+			<inertia ixx="2.1649254300340447321e-06" ixy="9.994772903258890182e-36"  ixz="-6.8390192539599129312e-37" iyy="9.0512478346558147629e-06" iyz="-1.6346734811287758878e-36" izz="7.3700503904704461167e-06" />
+		</inertial>
+	</link>
+	<link name="tibia">
+		<visual>
+			<origin xyz="0 0 -0.014999999999999999445" rpy="-1.570796326794896558 9.7007777288584565169e-33 -1.8830035426138072487e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/tibia.stl"/>
+			</geometry>
+			<material name="tibia_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 -0.014999999999999999445" rpy="-1.570796326794896558 9.7007777288584565169e-33 -1.8830035426138072487e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/tibia.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.051011411235233193595 -1.6134999224516663147e-19 -0.014999999999999994241" rpy="0 0 0"/>
+			<mass value="0.021572830399235441018" />
+			<inertia ixx="1.5794660713525416071e-06" ixy="5.6317140694458451304e-36"  ixz="6.5207294770219404341e-38" iyy="3.1487609853315266437e-05" iyz="3.072306071424424115e-39" izz="3.0675812978539347101e-05" />
+		</inertial>
+	</link>
+	<joint name="leg1_tibia" type="revolute">
+		<origin xyz="-0.06500000000000000222 -1.7347234759768070944e-18 -0.015000000000000013323" rpy="3.1415926535897877869 2.8310687127940746307e-15 -9.2027661089569745787e-15" />
+		<parent link="femur" />
+		<child link="tibia" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-2.6179938779914944114" upper="2.6179938779914944114"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<joint name="leg1_femur" type="revolute">
+		<origin xyz="-0.018749999999999995837 0 0" rpy="-1.570796326794896558 1.5643693111115871585e-14 1.887379141862725098e-15" />
+		<parent link="coxa" />
+		<child link="femur" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-1.570796326794896558" upper="1.570796326794896558"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<joint name="leg1_coxa" type="revolute">
+		<origin xyz="-0.070000000000000117684 -0.034999999999999344136 -0.0099999999999998978595" rpy="-3.1415926535897917837 -5.2316212122704544706e-16 1.570796326794896336" />
+		<parent link="root" />
+		<child link="coxa" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-0.69813170079773179122" upper="0.69813170079773179122"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<link name="coxa_2">
+		<visual>
+			<origin xyz="0 0 0.010000000000000001943" rpy="3.141592653589793116 1.8375427947278884142e-31 2.6174729644092741839e-32" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/coxa.stl"/>
+			</geometry>
+			<material name="coxa_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.010000000000000001943" rpy="3.141592653589793116 1.8375427947278884142e-31 2.6174729644092741839e-32" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/coxa.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.0098878038941457493255 7.7413528037404570211e-19 -1.7347234759768070944e-18" rpy="0 0 0"/>
+			<mass value="0.0066122388678941153989" />
+			<inertia ixx="6.8894459355149516998e-07" ixy="-6.3132810147292311922e-38"  ixz="-1.0326226644430846826e-37" iyy="1.2166590501427852292e-06" iyz="-5.0701552248022553597e-37" izz="6.3103311382374083454e-07" />
+		</inertial>
+	</link>
+	<link name="femur_2">
+		<visual>
+			<origin xyz="0 1.7347234759768070944e-18 0.0099999999999999984734" rpy="1.570796326794896558 4.6573964476057644294e-31 -1.1370690391672666137e-30" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/femur.stl"/>
+			</geometry>
+			<material name="femur_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 1.7347234759768070944e-18 0.0099999999999999984734" rpy="1.570796326794896558 4.6573964476057644294e-31 -1.1370690391672666137e-30" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/femur.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.026510642456918004362 3.5180284992609290369e-18 -5.2041704279304089573e-18" rpy="0 0 0"/>
+			<mass value="0.013450238867894117462" />
+			<inertia ixx="2.1649254300340447321e-06" ixy="8.8343111882026628873e-36"  ixz="-1.3039725248298985582e-36" iyy="9.0512478346558147629e-06" iyz="2.1666836891041284349e-36" izz="7.3700503904704461167e-06" />
+		</inertial>
+	</link>
+	<link name="tibia_2">
+		<visual>
+			<origin xyz="0 0 -0.014999999999999999445" rpy="-1.570796326794896558 1.0136852895328443478e-31 7.3955709864469856757e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/tibia.stl"/>
+			</geometry>
+			<material name="tibia_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 -0.014999999999999999445" rpy="-1.570796326794896558 1.0136852895328443478e-31 7.3955709864469856757e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/tibia.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.051011411235233193595 -1.613499922452139612e-19 -0.014999999999999994241" rpy="0 0 0"/>
+			<mass value="0.021572830399235441018" />
+			<inertia ixx="1.5794660713525416071e-06" ixy="-1.862574723327940323e-35"  ixz="-5.5034597930812987833e-37" iyy="3.1487609853315266437e-05" iyz="-3.3171175505106864997e-36" izz="3.0675812978539347101e-05" />
+		</inertial>
+	</link>
+	<joint name="leg2_tibia" type="revolute">
+		<origin xyz="-0.06500000000000000222 -1.7347234759768070944e-18 -0.01500000000000000118" rpy="3.1415926535897877869 1.5725440279660906702e-14 4.1633363423346173974e-17" />
+		<parent link="femur_2" />
+		<child link="tibia_2" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-2.6179938779914944114" upper="2.6179938779914944114"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<joint name="leg2_femur" type="revolute">
+		<origin xyz="-0.018749999999999988898 1.9584878692550414608e-19 3.4694469519536141888e-18" rpy="-1.570796326794896558 1.1309545136051015384e-14 1.2551241366990272946e-14" />
+		<parent link="coxa_2" />
+		<child link="femur_2" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-1.570796326794896558" upper="1.570796326794896558"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<joint name="leg2_coxa" type="revolute">
+		<origin xyz="1.8192220058428598053e-17 -0.034999999999999642508 -0.0099999999999999932693" rpy="3.1415926535897842342 -3.4147877280402608894e-15 1.5707963267948956698" />
+		<parent link="root" />
+		<child link="coxa_2" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-0.69813170079773179122" upper="0.69813170079773179122"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<link name="coxa_3">
+		<visual>
+			<origin xyz="0 0 0.010000000000000001943" rpy="3.141592653589793116 -0 -4.5305094529280456776e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/coxa.stl"/>
+			</geometry>
+			<material name="coxa_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.010000000000000001943" rpy="3.141592653589793116 -0 -4.5305094529280456776e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/coxa.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.0098878038941457493255 7.7413528037405080583e-19 -1.7347234759768070944e-18" rpy="0 0 0"/>
+			<mass value="0.0066122388678941153989" />
+			<inertia ixx="6.8894459355149516998e-07" ixy="-8.6333553212912571459e-37"  ixz="0" iyy="1.2166590501427852292e-06" iyz="0" izz="6.3103311382374083454e-07" />
+		</inertial>
+	</link>
+	<link name="femur_3">
+		<visual>
+			<origin xyz="0 1.7347234759768070944e-18 0.009999999999999995004" rpy="1.570796326794896558 -4.9773890530204168066e-31 -1.6749676260967952954e-30" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/femur.stl"/>
+			</geometry>
+			<material name="femur_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 1.7347234759768070944e-18 0.009999999999999995004" rpy="1.570796326794896558 -4.9773890530204168066e-31 -1.6749676260967952954e-30" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/femur.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.026510642456918004362 3.5180284992609475259e-18 -8.673617379884047798e-18" rpy="0 0 0"/>
+			<mass value="0.013450238867894117462" />
+			<inertia ixx="2.1649254300340447321e-06" ixy="-2.7459840298461045409e-36"  ixz="-3.6303421889537397091e-36" iyy="9.0512478346558147629e-06" iyz="1.8779637301046747123e-38" izz="7.3700503904704461167e-06" />
+		</inertial>
+	</link>
+	<link name="tibia_3">
+		<visual>
+			<origin xyz="0 3.4694469519536141888e-18 -0.015000000000000006384" rpy="-1.570796326794896558 7.6119312144127394008e-31 3.389636702118413709e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/tibia.stl"/>
+			</geometry>
+			<material name="tibia_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 3.4694469519536141888e-18 -0.015000000000000006384" rpy="-1.570796326794896558 7.6119312144127394008e-31 3.389636702118413709e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/tibia.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.051011411235233193595 3.308096959708420498e-18 -0.01500000000000000118" rpy="0 0 0"/>
+			<mass value="0.021572830399235441018" />
+			<inertia ixx="1.5794660713525416071e-06" ixy="-6.1595979320510854463e-36"  ixz="1.0493321452815619999e-35" iyy="3.1487609853315266437e-05" iyz="-4.8897152901275341704e-35" izz="3.0675812978539347101e-05" />
+		</inertial>
+	</link>
+	<joint name="leg3_tibia" type="revolute">
+		<origin xyz="-0.06500000000000000222 1.7347234759768070944e-18 -0.015000000000000020262" rpy="-3.1415926535897700234 4.1250506553550542695e-14 1.1071408175284054722e-14" />
+		<parent link="femur_3" />
+		<child link="tibia_3" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-2.6179938779914944114" upper="2.6179938779914944114"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<joint name="leg3_femur" type="revolute">
+		<origin xyz="-0.018749999999999995837 0 1.7347234759768070944e-18" rpy="-1.570796326794896558 -8.1848283112585688305e-15 6.1232339954780603346e-17" />
+		<parent link="coxa_3" />
+		<child link="femur_3" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-1.570796326794896558" upper="1.570796326794896558"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<joint name="leg3_coxa" type="revolute">
+		<origin xyz="0.070000000000000103806 -0.034999999999999975575 -0.0099999999999996706107" rpy="3.1415926535897917837 -8.6042284408448054161e-16 1.5707963267949081043" />
+		<parent link="root" />
+		<child link="coxa_3" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-0.69813170079773179122" upper="0.69813170079773179122"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<link name="coxa_4">
+		<visual>
+			<origin xyz="0 0 0.0099999999999999984734" rpy="-3.141592653589793116 3.8021460355391749598e-32 -1.4003657611817573647e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/coxa.stl"/>
+			</geometry>
+			<material name="coxa_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.0099999999999999984734" rpy="-3.141592653589793116 3.8021460355391749598e-32 -1.4003657611817573647e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/coxa.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.0098878038941457493255 7.7413528037404714656e-19 -5.2041704279304205129e-18" rpy="0 0 0"/>
+			<mass value="0.0066122388678941153989" />
+			<inertia ixx="6.8894459355149516998e-07" ixy="5.6115863365373199804e-39"  ixz="4.1825203437779645574e-38" iyy="1.2166590501427852292e-06" iyz="7.7958524123792515929e-38" izz="6.3103311382374083454e-07" />
+		</inertial>
+	</link>
+	<link name="femur_4">
+		<visual>
+			<origin xyz="0 1.7347234759768070944e-18 0.009999999999999995004" rpy="1.570796326794896558 -1.3164628986056496693e-30 -4.9303806576597000777e-32" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/femur.stl"/>
+			</geometry>
+			<material name="femur_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 1.7347234759768070944e-18 0.009999999999999995004" rpy="1.570796326794896558 -1.3164628986056496693e-30 -4.9303806576597000777e-32" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/femur.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.026510642456918004362 3.5180284992609036147e-18 -8.6736173798840724499e-18" rpy="0 0 0"/>
+			<mass value="0.013450238867894117462" />
+			<inertia ixx="2.1649254300340447321e-06" ixy="-5.5300003714144598761e-37"  ixz="2.707668330086638791e-36" iyy="9.0512478346558147629e-06" iyz="4.6024734225186339026e-37" izz="7.3700503904704461167e-06" />
+		</inertial>
+	</link>
+	<link name="tibia_4">
+		<visual>
+			<origin xyz="0 -1.7347234759768070944e-18 -0.014999999999999999445" rpy="-1.570796326794896558 -1.5234299086329085498e-31 -9.8607613152626475676e-32" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/tibia.stl"/>
+			</geometry>
+			<material name="tibia_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 -1.7347234759768070944e-18 -0.014999999999999999445" rpy="-1.570796326794896558 -1.5234299086329085498e-31 -9.8607613152626475676e-32" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/tibia.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.051011411235233193595 -1.8960734682219784444e-18 -0.014999999999999994241" rpy="0 0 0"/>
+			<mass value="0.021572830399235441018" />
+			<inertia ixx="1.5794660713525416071e-06" ixy="4.2642475530774902448e-37"  ixz="4.6129075206426778777e-36" iyy="3.1487609853315266437e-05" iyz="3.4751104564426990804e-36" izz="3.0675812978539347101e-05" />
+		</inertial>
+	</link>
+	<joint name="leg4_tibia" type="revolute">
+		<origin xyz="-0.065000000000000016098 0 -0.014999999999999999445" rpy="3.1415926535897824579 -1.8243105429657796057e-14 -1.2490009027030957576e-16" />
+		<parent link="femur_4" />
+		<child link="tibia_4" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-2.6179938779914944114" upper="2.6179938779914944114"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<joint name="leg4_femur" type="revolute">
+		<origin xyz="-0.018749999999999995837 1.3877787807814456755e-17 1.7347234759768070944e-18" rpy="-1.570796326794896558 2.5286896046169296847e-15 -2.0255849010682997116e-14" />
+		<parent link="coxa_4" />
+		<child link="femur_4" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-1.570796326794896558" upper="1.570796326794896558"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<joint name="leg4_coxa" type="revolute">
+		<origin xyz="0.070000000000000089928 0.034999999999999371891 -0.0100000000000001147" rpy="-3.1415926535897917837 1.0715218847964300664e-15 -1.5707963267948972241" />
+		<parent link="root" />
+		<child link="coxa_4" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-0.69813170079773179122" upper="0.69813170079773179122"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<link name="coxa_5">
+		<visual>
+			<origin xyz="0 6.1629758220391547298e-33 0.010000000000000000208" rpy="3.141592653589793116 -1.8947807930055415369e-32 -9.2380557853256255929e-33" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/coxa.stl"/>
+			</geometry>
+			<material name="coxa_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 6.1629758220391547298e-33 0.010000000000000000208" rpy="3.141592653589793116 -1.8947807930055415369e-32 -9.2380557853256255929e-33" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/coxa.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.0098878038941457493255 7.7413528037405215398e-19 -3.4694469519536141888e-18" rpy="0 0 0"/>
+			<mass value="0.0066122388678941153989" />
+			<inertia ixx="6.8894459355149516998e-07" ixy="-2.8165008045453564803e-38"  ixz="2.8190638652540798964e-38" iyy="1.2166590501427852292e-06" iyz="-8.2387044819515295828e-39" izz="6.3103311382374083454e-07" />
+		</inertial>
+	</link>
+	<link name="femur_5">
+		<visual>
+			<origin xyz="0 0 0.0099999999999999984734" rpy="1.570796326794896558 2.2098436197906569279e-32 2.1931254186082799707e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/femur.stl"/>
+			</geometry>
+			<material name="femur_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.0099999999999999984734" rpy="1.570796326794896558 2.2098436197906569279e-32 2.1931254186082799707e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/femur.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.026510642456918004362 1.7833050232840903573e-18 -5.2041704279304205129e-18" rpy="0 0 0"/>
+			<mass value="0.013450238867894117462" />
+			<inertia ixx="2.1649254300340447321e-06" ixy="-1.5102568706307761695e-36"  ixz="-2.1070805481751205551e-37" iyy="9.0512478346558147629e-06" iyz="-2.6767037572955667065e-38" izz="7.3700503904704461167e-06" />
+		</inertial>
+	</link>
+	<link name="tibia_5">
+		<visual>
+			<origin xyz="0 0 -0.014999999999999999445" rpy="-1.570796326794896558 -7.2762752929251869678e-33 -5.3840582763518183077e-30" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/tibia.stl"/>
+			</geometry>
+			<material name="tibia_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 -0.014999999999999999445" rpy="-1.570796326794896558 -7.2762752929251869678e-33 -5.3840582763518183077e-30" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/tibia.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.051011411235233193595 -1.6134999224490159944e-19 -0.014999999999999994241" rpy="0 0 0"/>
+			<mass value="0.021572830399235441018" />
+			<inertia ixx="1.5794660713525416071e-06" ixy="1.6102718905959623173e-34"  ixz="1.5675969430768607344e-37" iyy="3.1487609853315266437e-05" iyz="-1.2924952701888961752e-38" izz="3.0675812978539347101e-05" />
+		</inertial>
+	</link>
+	<joint name="leg5_tibia" type="revolute">
+		<origin xyz="-0.06500000000000000222 -1.7347234759768070944e-18 -0.01500000000000000118" rpy="3.141592653589793116 -1.6081226496732546059e-16 -1.0463774547150106976e-13" />
+		<parent link="femur_5" />
+		<child link="tibia_5" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-2.6179938779914944114" upper="2.6179938779914944114"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<joint name="leg5_femur" type="revolute">
+		<origin xyz="-0.018749999999999995837 -1.8415029557023978118e-19 1.7347234759768070944e-18" rpy="-1.570796326794896558 1.4905529151863931593e-14 -8.3266726846889817089e-16" />
+		<parent link="coxa_5" />
+		<child link="femur_5" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-1.570796326794896558" upper="1.570796326794896558"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<joint name="leg5_coxa" type="revolute">
+		<origin xyz="-5.7352654186960304952e-18 0.034999999999999677203 -0.0099999999999999967387" rpy="3.141592653589793116 -2.9302144514022136971e-16 -1.5707963267948970021" />
+		<parent link="root" />
+		<child link="coxa_5" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-0.69813170079773179122" upper="0.69813170079773179122"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<link name="coxa_6">
+		<visual>
+			<origin xyz="0 0 0.010000000000000000208" rpy="3.141592653589793116 3.4739663641086337233e-31 -3.3216135015827989792e-32" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/coxa.stl"/>
+			</geometry>
+			<material name="coxa_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.010000000000000000208" rpy="3.141592653589793116 3.4739663641086337233e-31 -3.3216135015827989792e-32" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/coxa.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.0098878038941457493255 7.7413528037404714656e-19 -3.4694469519536141888e-18" rpy="0 0 0"/>
+			<mass value="0.0066122388678941153989" />
+			<inertia ixx="6.8894459355149516998e-07" ixy="-1.8295708851991381815e-37"  ixz="-1.6155619800523040749e-37" iyy="1.2166590501427852292e-06" iyz="-3.8251621272020683418e-37" izz="6.3103311382374083454e-07" />
+		</inertial>
+	</link>
+	<link name="femur_6">
+		<visual>
+			<origin xyz="0 0 0.009999999999999995004" rpy="1.570796326794896558 2.3807247397352497144e-30 2.2186712959350590954e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/femur.stl"/>
+			</geometry>
+			<material name="femur_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.009999999999999995004" rpy="1.570796326794896558 2.3807247397352497144e-30 2.2186712959350590954e-31" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/femur.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.026510642456918004362 1.7833050232840868906e-18 -8.6736173798839707608e-18" rpy="0 0 0"/>
+			<mass value="0.013450238867894117462" />
+			<inertia ixx="2.1649254300340447321e-06" ixy="1.1134806509702657624e-35"  ixz="-4.5379316246876718207e-36" iyy="9.0512478346558147629e-06" iyz="-3.0356398047318925908e-36" izz="7.3700503904704461167e-06" />
+		</inertial>
+	</link>
+	<link name="tibia_6">
+		<visual>
+			<origin xyz="0 0 -0.014999999999999999445" rpy="-1.570796326794896558 4.7373571323847932853e-32 0" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/tibia.stl"/>
+			</geometry>
+			<material name="tibia_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 -0.014999999999999999445" rpy="-1.570796326794896558 4.7373571323847932853e-32 0" />
+			<geometry>
+				<mesh filename="file://$(find my_package)/meshes/tibia.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.051011411235233193595 -1.6134999224517623705e-19 -0.014999999999999994241" rpy="0 0 0"/>
+			<mass value="0.021572830399235441018" />
+			<inertia ixx="1.5794660713525416071e-06" ixy="0"  ixz="-1.5280477626415683815e-36" iyy="3.1487609853315266437e-05" iyz="0" izz="3.0675812978539347101e-05" />
+		</inertial>
+	</link>
+	<joint name="leg6_tibia" type="revolute">
+		<origin xyz="-0.065000000000000016098 0 -0.014999999999999999445" rpy="3.1415926535897775729 2.8838924122788362667e-14 -1.7397575171928430303e-14" />
+		<parent link="femur_6" />
+		<child link="tibia_6" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-2.6179938779914944114" upper="2.6179938779914944114"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<joint name="leg6_femur" type="revolute">
+		<origin xyz="-0.018749999999999988898 0 0" rpy="-1.570796326794896558 -7.8262203962896167153e-15 2.6373518023573927836e-14" />
+		<parent link="coxa_6" />
+		<child link="femur_6" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-1.570796326794896558" upper="1.570796326794896558"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<joint name="leg6_coxa" type="revolute">
+		<origin xyz="-0.070000000000000103806 0.034999999999999982514 -0.0099999999999999568401" rpy="3.1415926535897891192 -5.4947520445765954984e-15 -1.5707963267948974462" />
+		<parent link="root" />
+		<child link="coxa_6" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-0.69813170079773179122" upper="0.69813170079773179122"/>
+		<dynamics damping="0.01" friction="0.01"/>
+	</joint>
+	<!-- <xacro:include filename="robot_gazebo.xacro"/> -->
+</robot>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<world name="basic_world">
+  <model name="ground_plane">
+    <static>1</static>
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <plane size="10 10 0.1"/>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <plane size="10 10 0.1"/>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</world>
