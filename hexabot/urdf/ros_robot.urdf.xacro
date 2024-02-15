@@ -1,0 +1,8 @@
+<?xml version = "1.0"?>
+<robot name="onshape" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:include filename="ros_robot_core.xacro"/>
+	<xacro:include filename="robot_gazebo.xacro"/>
+	<xacro:include filename="ros2_control.xacro"/>
+
+</robot>

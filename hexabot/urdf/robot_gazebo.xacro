@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <gazebo>
+        <plugin name="gazebo_ros_joint_state_publisher"
+            filename="libgazebo_ros_joint_state_publisher.so">
+            <update_rate>20</update_rate>
+            <!-- <joint_name>base_link_joint</joint_name> -->
+            <joint_name>leg1_coxa</joint_name>
+            <joint_name>leg1_femur</joint_name>
+            <joint_name>leg1_tibia</joint_name>
+            <joint_name>leg2_coxa</joint_name>
+            <joint_name>leg2_femur</joint_name>
+            <joint_name>leg2_tibia</joint_name>
+            <joint_name>leg3_coxa</joint_name>
+            <joint_name>leg3_femur</joint_name>
+            <joint_name>leg3_tibia</joint_name>
+            <joint_name>leg4_coxa</joint_name>
+            <joint_name>leg4_femur</joint_name>
+            <joint_name>leg4_tibia</joint_name>
+            <joint_name>leg5_coxa</joint_name>
+            <joint_name>leg5_femur</joint_name>
+            <joint_name>leg5_tibia</joint_name>
+            <joint_name>leg6_coxa</joint_name>
+            <joint_name>leg6_femur</joint_name>
+            <joint_name>leg6_tibia</joint_name>
+            
+        </plugin>
+    </gazebo>
+    
+    <gazebo>
+        <plugin name="gazebo_ros_joint_pose_trajectory"
+            filename="libgazebo_ros_joint_pose_trajectory.so">
+            <update_rate>2</update_rate>
+        </plugin>
+    </gazebo>
+
+
+</robot>

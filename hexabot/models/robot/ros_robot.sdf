@@ -1,0 +1,979 @@
+<sdf version='1.7'>
+  <model name='onshape'>
+    <link name='body'>
+      <inertial>
+        <pose>-0 -0 -0.01 0 -0 0</pose>
+        <mass>0.275019</mass>
+        <inertia>
+          <ixx>0.000135889</ixx>
+          <ixy>-1.94789e-18</ixy>
+          <ixz>-1.32177e-18</ixz>
+          <iyy>0.00075777</iyy>
+          <iyz>-1.40515e-18</iyz>
+          <izz>0.000875325</izz>
+        </inertia>
+      </inertial>
+      <collision name='body_collision'>
+        <pose>-0 0 -0.02 -0 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/body.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='body_visual'>
+        <pose>-0 0 -0.02 -0 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/body.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg1_coxa' type='revolute'>
+      <pose relative_to='body'>-0.07 -0.035 -0.01 -3.14159 -0 1.5708</pose>
+      <parent>body</parent>
+      <child>coxa</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.698132</lower>
+          <upper>0.698132</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='coxa'>
+      <pose relative_to='leg1_coxa'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.009888 0 -0 0 -0 0</pose>
+        <mass>0.00661224</mass>
+        <inertia>
+          <ixx>6.88945e-07</ixx>
+          <ixy>1.36618e-38</ixy>
+          <ixz>1.0027e-39</ixz>
+          <iyy>1.21666e-06</iyy>
+          <iyz>-3.78086e-37</iyz>
+          <izz>6.31033e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='coxa_collision'>
+        <pose>-0 0 0.01 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/coxa.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='coxa_visual'>
+        <pose>-0 0 0.01 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/coxa.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg1_femur' type='revolute'>
+      <pose relative_to='coxa'>-0.01875 0 0 -1.5708 0 0</pose>
+      <parent>coxa</parent>
+      <child>femur</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.5708</lower>
+          <upper>1.5708</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='femur'>
+      <pose relative_to='leg1_femur'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.026511 0 -0 0 -0 0</pose>
+        <mass>0.0134502</mass>
+        <inertia>
+          <ixx>2.16493e-06</ixx>
+          <ixy>9.99477e-36</ixy>
+          <ixz>-6.83902e-37</ixz>
+          <iyy>9.05125e-06</iyy>
+          <iyz>-1.63467e-36</iyz>
+          <izz>7.37005e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='femur_collision'>
+        <pose>0 0 0.01 1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='femur_visual'>
+        <pose>0 0 0.01 1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg1_tibia' type='revolute'>
+      <pose relative_to='femur'>-0.065 -0 -0.015 3.14159 0 -0</pose>
+      <parent>femur</parent>
+      <child>tibia</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-2.61799</lower>
+          <upper>2.61799</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='tibia'>
+      <pose relative_to='leg1_tibia'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.053082 -0 -0.015 0 -0 0</pose>
+        <mass>0.0224269</mass>
+        <inertia>
+          <ixx>1.73516e-06</ixx>
+          <ixy>6.08347e-36</ixy>
+          <ixz>7.0079e-38</ixz>
+          <iyy>3.40424e-05</iyy>
+          <iyz>3.54034e-39</iyz>
+          <izz>3.31069e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='tibia_collision'>
+        <pose>0 0 -0.015 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='tibia_visual'>
+        <pose>0 0 -0.015 -1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg2_coxa' type='revolute'>
+      <pose relative_to='body'>0 -0.035 -0.01 3.14159 -0 1.5708</pose>
+      <parent>body</parent>
+      <child>coxa_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.698132</lower>
+          <upper>0.698132</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='coxa_2'>
+      <pose relative_to='leg2_coxa'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.009888 0 -0 0 -0 0</pose>
+        <mass>0.00661224</mass>
+        <inertia>
+          <ixx>6.88945e-07</ixx>
+          <ixy>-6.31328e-38</ixy>
+          <ixz>-1.03262e-37</ixz>
+          <iyy>1.21666e-06</iyy>
+          <iyz>-5.07016e-37</iyz>
+          <izz>6.31033e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='coxa_2_collision'>
+        <pose>0 0 0.01 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/coxa.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='coxa_2_visual'>
+        <pose>0 0 0.01 3.14159 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/coxa.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg2_femur' type='revolute'>
+      <pose relative_to='coxa_2'>-0.01875 0 0 -1.5708 0 0</pose>
+      <parent>coxa_2</parent>
+      <child>femur_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.5708</lower>
+          <upper>1.5708</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='femur_2'>
+      <pose relative_to='leg2_femur'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.026511 0 -0 0 -0 0</pose>
+        <mass>0.0134502</mass>
+        <inertia>
+          <ixx>2.16493e-06</ixx>
+          <ixy>8.83431e-36</ixy>
+          <ixz>-1.30397e-36</ixz>
+          <iyy>9.05125e-06</iyy>
+          <iyz>2.16668e-36</iyz>
+          <izz>7.37005e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='femur_2_collision'>
+        <pose>0 0 0.01 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='femur_2_visual'>
+        <pose>0 0 0.01 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg2_tibia' type='revolute'>
+      <pose relative_to='femur_2'>-0.065 -0 -0.015 3.14159 0 0</pose>
+      <parent>femur_2</parent>
+      <child>tibia_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-2.61799</lower>
+          <upper>2.61799</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='tibia_2'>
+      <pose relative_to='leg2_tibia'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.053082 -0 -0.015 0 -0 0</pose>
+        <mass>0.0224269</mass>
+        <inertia>
+          <ixx>1.73516e-06</ixx>
+          <ixy>-2.01166e-35</ixy>
+          <ixz>-5.97056e-37</ixz>
+          <iyy>3.40424e-05</iyy>
+          <iyz>-3.61737e-36</iyz>
+          <izz>3.31069e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='tibia_2_collision'>
+        <pose>0 0 -0.015 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='tibia_2_visual'>
+        <pose>0 0 -0.015 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg3_coxa' type='revolute'>
+      <pose relative_to='body'>0.07 -0.035 -0.01 3.14159 -0 1.5708</pose>
+      <parent>body</parent>
+      <child>coxa_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.698132</lower>
+          <upper>0.698132</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='coxa_3'>
+      <pose relative_to='leg3_coxa'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.009888 0 -0 0 -0 0</pose>
+        <mass>0.00661224</mass>
+        <inertia>
+          <ixx>6.88945e-07</ixx>
+          <ixy>-8.63336e-37</ixy>
+          <ixz>0</ixz>
+          <iyy>1.21666e-06</iyy>
+          <iyz>0</iyz>
+          <izz>6.31033e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='coxa_3_collision'>
+        <pose>0 0 0.01 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/coxa.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='coxa_3_visual'>
+        <pose>0 0 0.01 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/coxa.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg3_femur' type='revolute'>
+      <pose relative_to='coxa_3'>-0.01875 0 0 -1.5708 -0 0</pose>
+      <parent>coxa_3</parent>
+      <child>femur_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.5708</lower>
+          <upper>1.5708</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='femur_3'>
+      <pose relative_to='leg3_femur'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.026511 0 -0 0 -0 0</pose>
+        <mass>0.0134502</mass>
+        <inertia>
+          <ixx>2.16493e-06</ixx>
+          <ixy>-2.74598e-36</ixy>
+          <ixz>-3.63034e-36</ixz>
+          <iyy>9.05125e-06</iyy>
+          <iyz>1.87796e-38</iyz>
+          <izz>7.37005e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='femur_3_collision'>
+        <pose>0 0 0.01 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='femur_3_visual'>
+        <pose>0 0 0.01 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg3_tibia' type='revolute'>
+      <pose relative_to='femur_3'>-0.065 0 -0.015 -3.14159 0 0</pose>
+      <parent>femur_3</parent>
+      <child>tibia_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-2.61799</lower>
+          <upper>2.61799</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='tibia_3'>
+      <pose relative_to='leg3_tibia'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.053082 0 -0.015 0 -0 0</pose>
+        <mass>0.0224269</mass>
+        <inertia>
+          <ixx>1.73516e-06</ixx>
+          <ixy>-6.65003e-36</ixy>
+          <ixz>1.13017e-35</ixz>
+          <iyy>3.40424e-05</iyy>
+          <iyz>-5.28622e-35</iyz>
+          <izz>3.31069e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='tibia_3_collision'>
+        <pose>0 0 -0.015 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='tibia_3_visual'>
+        <pose>0 0 -0.015 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg4_coxa' type='revolute'>
+      <pose relative_to='body'>0.07 0.035 -0.01 -3.14159 0 -1.5708</pose>
+      <parent>body</parent>
+      <child>coxa_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.698132</lower>
+          <upper>0.698132</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='coxa_4'>
+      <pose relative_to='leg4_coxa'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.009888 0 -0 0 -0 0</pose>
+        <mass>0.00661224</mass>
+        <inertia>
+          <ixx>6.88945e-07</ixx>
+          <ixy>5.61159e-39</ixy>
+          <ixz>4.18252e-38</ixz>
+          <iyy>1.21666e-06</iyy>
+          <iyz>7.79585e-38</iyz>
+          <izz>6.31033e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='coxa_4_collision'>
+        <pose>0 0 0.01 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/coxa.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='coxa_4_visual'>
+        <pose>0 0 0.01 -3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/coxa.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg4_femur' type='revolute'>
+      <pose relative_to='coxa_4'>-0.01875 0 0 -1.5708 0 -0</pose>
+      <parent>coxa_4</parent>
+      <child>femur_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.5708</lower>
+          <upper>1.5708</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='femur_4'>
+      <pose relative_to='leg4_femur'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.026511 0 -0 0 -0 0</pose>
+        <mass>0.0134502</mass>
+        <inertia>
+          <ixx>2.16493e-06</ixx>
+          <ixy>-5.53e-37</ixy>
+          <ixz>2.70767e-36</ixz>
+          <iyy>9.05125e-06</iyy>
+          <iyz>4.60247e-37</iyz>
+          <izz>7.37005e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='femur_4_collision'>
+        <pose>0 0 0.01 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='femur_4_visual'>
+        <pose>0 0 0.01 1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg4_tibia' type='revolute'>
+      <pose relative_to='femur_4'>-0.065 0 -0.015 3.14159 -0 -0</pose>
+      <parent>femur_4</parent>
+      <child>tibia_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-2.61799</lower>
+          <upper>2.61799</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='tibia_4'>
+      <pose relative_to='leg4_tibia'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.053082 -0 -0.015 0 -0 0</pose>
+        <mass>0.0224269</mass>
+        <inertia>
+          <ixx>1.73516e-06</ixx>
+          <ixy>4.58307e-37</ixy>
+          <ixz>4.98314e-36</ixz>
+          <iyy>3.40424e-05</iyy>
+          <iyz>3.75234e-36</iyz>
+          <izz>3.31069e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='tibia_4_collision'>
+        <pose>0 -0 -0.015 -1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='tibia_4_visual'>
+        <pose>0 -0 -0.015 -1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg5_coxa' type='revolute'>
+      <pose relative_to='body'>-0 0.035 -0.01 3.14159 -0 -1.5708</pose>
+      <parent>body</parent>
+      <child>coxa_5</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.698132</lower>
+          <upper>0.698132</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='coxa_5'>
+      <pose relative_to='leg5_coxa'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.009888 0 -0 0 -0 0</pose>
+        <mass>0.00661224</mass>
+        <inertia>
+          <ixx>6.88945e-07</ixx>
+          <ixy>-2.8165e-38</ixy>
+          <ixz>2.81906e-38</ixz>
+          <iyy>1.21666e-06</iyy>
+          <iyz>-8.2387e-39</iyz>
+          <izz>6.31033e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='coxa_5_collision'>
+        <pose>0 0 0.01 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/coxa.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='coxa_5_visual'>
+        <pose>0 0 0.01 3.14159 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/coxa.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg5_femur' type='revolute'>
+      <pose relative_to='coxa_5'>-0.01875 -0 0 -1.5708 0 -0</pose>
+      <parent>coxa_5</parent>
+      <child>femur_5</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.5708</lower>
+          <upper>1.5708</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='femur_5'>
+      <pose relative_to='leg5_femur'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.026511 0 -0 0 -0 0</pose>
+        <mass>0.0134502</mass>
+        <inertia>
+          <ixx>2.16493e-06</ixx>
+          <ixy>-1.51026e-36</ixy>
+          <ixz>-2.10708e-37</ixz>
+          <iyy>9.05125e-06</iyy>
+          <iyz>-2.6767e-38</iyz>
+          <izz>7.37005e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='femur_5_collision'>
+        <pose>0 0 0.01 1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='femur_5_visual'>
+        <pose>0 0 0.01 1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg5_tibia' type='revolute'>
+      <pose relative_to='femur_5'>-0.065 -0 -0.015 3.14159 -0 -0</pose>
+      <parent>femur_5</parent>
+      <child>tibia_5</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-2.61799</lower>
+          <upper>2.61799</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='tibia_5'>
+      <pose relative_to='leg5_tibia'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.053082 -0 -0.015 0 -0 0</pose>
+        <mass>0.0224269</mass>
+        <inertia>
+          <ixx>1.73516e-06</ixx>
+          <ixy>1.73944e-34</ixy>
+          <ixz>1.69405e-37</ixz>
+          <iyy>3.40424e-05</iyy>
+          <iyz>-1.48939e-38</iyz>
+          <izz>3.31069e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='tibia_5_collision'>
+        <pose>0 0 -0.015 -1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='tibia_5_visual'>
+        <pose>0 0 -0.015 -1.5708 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg6_coxa' type='revolute'>
+      <pose relative_to='body'>-0.07 0.035 -0.01 3.14159 -0 -1.5708</pose>
+      <parent>body</parent>
+      <child>coxa_6</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.698132</lower>
+          <upper>0.698132</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='coxa_6'>
+      <pose relative_to='leg6_coxa'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.009888 0 -0 0 -0 0</pose>
+        <mass>0.00661224</mass>
+        <inertia>
+          <ixx>6.88945e-07</ixx>
+          <ixy>-1.82957e-37</ixy>
+          <ixz>-1.61556e-37</ixz>
+          <iyy>1.21666e-06</iyy>
+          <iyz>-3.82516e-37</iyz>
+          <izz>6.31033e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='coxa_6_collision'>
+        <pose>0 0 0.01 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/coxa.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='coxa_6_visual'>
+        <pose>0 0 0.01 3.14159 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/coxa.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg6_femur' type='revolute'>
+      <pose relative_to='coxa_6'>-0.01875 0 0 -1.5708 -0 0</pose>
+      <parent>coxa_6</parent>
+      <child>femur_6</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.5708</lower>
+          <upper>1.5708</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='femur_6'>
+      <pose relative_to='leg6_femur'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.026511 0 -0 0 -0 0</pose>
+        <mass>0.0134502</mass>
+        <inertia>
+          <ixx>2.16493e-06</ixx>
+          <ixy>1.11348e-35</ixy>
+          <ixz>-4.53793e-36</ixz>
+          <iyy>9.05125e-06</iyy>
+          <iyz>-3.03564e-36</iyz>
+          <izz>7.37005e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='femur_6_collision'>
+        <pose>0 0 0.01 1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='femur_6_visual'>
+        <pose>0 0 0.01 1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/femur.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='leg6_tibia' type='revolute'>
+      <pose relative_to='femur_6'>-0.065 0 -0.015 3.14159 0 -0</pose>
+      <parent>femur_6</parent>
+      <child>tibia_6</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-2.61799</lower>
+          <upper>2.61799</upper>
+          <effort>1</effort>
+          <velocity>20</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='tibia_6'>
+      <pose relative_to='leg6_tibia'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.053082 -0 -0.015 0 -0 0</pose>
+        <mass>0.0224269</mass>
+        <inertia>
+          <ixx>1.73516e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>-1.6506e-36</ixz>
+          <iyy>3.40424e-05</iyy>
+          <iyz>0</iyz>
+          <izz>3.31069e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='tibia_6_collision'>
+        <pose>0 0 -0.015 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='tibia_6_visual'>
+        <pose>0 0 -0.015 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://models/robot/meshes/tibia.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <plugin name='gazebo_ros_joint_state_publisher' filename='libgazebo_ros_joint_state_publisher.so'>
+      <update_rate>20</update_rate>
+      <joint_name>leg1_coxa</joint_name>
+      <joint_name>leg1_femur</joint_name>
+      <joint_name>leg1_tibia</joint_name>
+      <joint_name>leg2_coxa</joint_name>
+      <joint_name>leg2_femur</joint_name>
+      <joint_name>leg2_tibia</joint_name>
+      <joint_name>leg3_coxa</joint_name>
+      <joint_name>leg3_femur</joint_name>
+      <joint_name>leg3_tibia</joint_name>
+      <joint_name>leg4_coxa</joint_name>
+      <joint_name>leg4_femur</joint_name>
+      <joint_name>leg4_tibia</joint_name>
+      <joint_name>leg5_coxa</joint_name>
+      <joint_name>leg5_femur</joint_name>
+      <joint_name>leg5_tibia</joint_name>
+      <joint_name>leg6_coxa</joint_name>
+      <joint_name>leg6_femur</joint_name>
+      <joint_name>leg6_tibia</joint_name>
+    </plugin>
+    <static>0</static>
+    <plugin name='gazebo_ros_joint_pose_trajectory' filename='libgazebo_ros_joint_pose_trajectory.so'>
+      <update_rate>2</update_rate>
+    </plugin>
+  </model>
+</sdf>

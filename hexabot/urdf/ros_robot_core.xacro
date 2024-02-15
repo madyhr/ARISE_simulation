@@ -1,0 +1,663 @@
+<?xml version = "1.0"?>
+<robot name="onshape" xmlns:xacro="http://www.ros.org/wiki/xacro">
+	<!-- This first link called "world" is empty -->
+	<!-- <link name="world"></link> -->
+	<!-- A simple fixed joint from our empty world link, to our base. -->
+	<!-- The base origin is offset from the world origin. -->
+	<!-- This joint and the world link above should be commented out in real simulations -->
+	<!-- After fixing the floppy nature of the robot of couse :) (prob inertial tags) -->
+	<!-- <joint name="body_joint" type="fixed">
+		<origin xyz="0 0 0.0" rpy="0 0 0"/>
+		<parent link="world"/>
+		<child link="body"/>
+	</joint> -->
+	<!-- <link name="base_link">
+	</link> -->
+
+	<!-- <joint name="base_link_joint" type="fixed">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="body"/>
+	</joint> -->
+<!--  -->
+	<link name="base_link"> 
+	<!-- <link name = "base_link"/> -->
+		<visual>
+			<origin xyz="0 0 -0.02" rpy="0 0 -1.5707963267948943376" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/body.stl"/>
+			</geometry>
+			<material name="body_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 -0.019999999999999996947" rpy="0 0 -1.5707963267948943376" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/body.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="0 0 -0.0099999999999999568401" rpy="0 0 0"/>
+			<!-- <mass value="0.27501886641472944595" /> -->
+			<mass value="2.7501886641472944595" />
+			<inertia ixx="0.013588878231084592957" ixy="0"  ixz="0" iyy="0.075777043457423689729" iyz="0" izz="0.087532462579078846188" />
+		</inertial>
+
+	</link>
+	
+
+	<link name="coxa">
+		<visual>
+			<origin xyz="0 0 0.010000000000000000208" rpy="3.141592653589793116 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/coxa.stl"/>
+			</geometry>
+			<material name="coxa_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.010000000000000000208" rpy="3.141592653589793116 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/coxa.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.0098878038941457562644 0 -0" rpy="0 0 0"/>
+			<!-- <mass value="0.0066122388678941153989" /> -->
+			<mass value="0.066122388678941153989" />
+			<inertia ixx="6.8894459355149516998e-04" ixy="0"  ixz="0" iyy="1.2166590501427852292e-03" iyz="0" izz="6.3103311382374083454e-04" />
+		</inertial>
+	</link>
+	<link name="femur">
+		<visual>
+			<origin xyz="0 0 0.010000000000000001943" rpy="1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/femur.stl"/>
+			</geometry>
+			<material name="femur_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.010000000000000001943" rpy="1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/femur.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.026510642456918004362 0 0" rpy="0 0 0"/>
+			<!-- <mass value="0.013450238867894117462" /> -->
+			<mass value="0.13450238867894117462" />
+			<inertia ixx="2.1649254300340447321e-03" ixy="0"  ixz="0" iyy="9.0512478346558147629e-03" iyz="0" izz="7.3700503904704461167e-03" />
+		</inertial>
+	</link>
+	<link name="tibia">
+		<visual>
+			<origin xyz="0 0 -0.015" rpy="-1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/tibia.stl"/>
+			</geometry>
+			<material name="tibia_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 -0.015" rpy="-1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/tibia.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.051011411235233193595 0 -0.014999999999999994241" rpy="0 0 0"/>
+			<!-- <mass value="0.021572830399235441018" /> -->
+			<mass value="0.21572830399235441018" />
+			<inertia ixx="1.5794660713525416071e-03" ixy="0"  ixz="0" iyy="3.1487609853315266437e-03" iyz="0" izz="3.0675812978539347101e-03" />
+		</inertial>
+	</link>
+	<joint name="leg1_tibia" type="revolute">
+		<origin xyz="-0.06500000000000000222 0 -0.015000000000000013323" rpy="3.1415926535897877869 0 0" />
+		<parent link="femur" />
+		<child link="tibia" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-2.6179938779914944114" upper="2.6179938779914944114"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<joint name="leg1_femur" type="revolute">
+		<origin xyz="-0.018749999999999995837 0 0" rpy="-1.570796326794896558 0 0" />
+		<parent link="coxa" />
+		<child link="femur" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-1.570796326794896558" upper="1.570796326794896558"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<joint name="leg1_coxa" type="revolute">
+		<origin xyz="-0.070000000000000117684 -0.034999999999999344136 -0.0099999999999998978595" rpy="-3.1415926535897917837 0 1.570796326794896336" />
+		<parent link="base_link" />
+		<child link="coxa" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-0.69813170079773179122" upper="0.69813170079773179122"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<link name="coxa_2">
+		<visual>
+			<origin xyz="0 0 0.010000000000000001943" rpy="3.141592653589793116 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/coxa.stl"/>
+			</geometry>
+			<material name="coxa_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.010000000000000001943" rpy="3.141592653589793116 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/coxa.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.0098878038941457493255 0 0" rpy="0 0 0"/>
+			<!-- <mass value="0.0066122388678941153989" /> -->
+			<mass value="0.066122388678941153989" />
+			<inertia ixx="6.8894459355149516998e-04" ixy="0"  ixz="0" iyy="1.2166590501427852292e-03" iyz="0" izz="6.3103311382374083454e-04" />
+		</inertial>
+	</link>
+	<link name="femur_2">
+		<visual>
+			<origin xyz="0 0 0.0099999999999999984734" rpy="1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/femur.stl"/>
+			</geometry>
+			<material name="femur_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.0099999999999999984734" rpy="1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/femur.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.026510642456918004362 0 0" rpy="0 0 0"/>
+			<!-- <mass value="0.013450238867894117462" /> -->
+			<mass value="0.13450238867894117462" />
+			<inertia ixx="2.1649254300340447321e-03" ixy="0"  ixz="0" iyy="9.0512478346558147629e-03" iyz="0" izz="7.3700503904704461167e-03" />
+		</inertial>
+	</link>
+	<link name="tibia_2">
+		<visual>
+			<origin xyz="0 0 -0.015" rpy="-1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/tibia.stl"/>
+			</geometry>
+			<material name="tibia_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 -0.015" rpy="-1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/tibia.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.051011411235233193595 0 -0.014999999999999994241" rpy="0 0 0"/>
+			<!-- <mass value="0.021572830399235441018" /> -->
+			<mass value="0.21572830399235441018" />
+			<inertia ixx="1.5794660713525416071e-03" ixy="0"  ixz="0" iyy="3.1487609853315266437e-03" iyz="0" izz="3.0675812978539347101e-03" />
+		</inertial>
+	</link>
+	<joint name="leg2_tibia" type="revolute">
+		<origin xyz="-0.06500000000000000222 0 -0.01500000000000000118" rpy="3.1415926535897877869 0 0" />
+		<parent link="femur_2" />
+		<child link="tibia_2" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-2.6179938779914944114" upper="2.6179938779914944114"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<joint name="leg2_femur" type="revolute">
+		<origin xyz="-0.018749999999999988898 0 0" rpy="-1.570796326794896558 0 0" />
+		<parent link="coxa_2" />
+		<child link="femur_2" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-1.570796326794896558" upper="1.570796326794896558"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<joint name="leg2_coxa" type="revolute">
+		<origin xyz="0 -0.034999999999999642508 -0.0099999999999999932693" rpy="3.1415926535897842342 0 1.5707963267948956698" />
+		<parent link="base_link" />
+		<child link="coxa_2" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-0.69813170079773179122" upper="0.69813170079773179122"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<link name="coxa_3">
+		<visual>
+			<origin xyz="0 0 0.010000000000000001943" rpy="3.141592653589793116 -0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/coxa.stl"/>
+			</geometry>
+			<material name="coxa_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.010000000000000001943" rpy="3.141592653589793116 -0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/coxa.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.0098878038941457493255 0 0" rpy="0 0 0"/>
+			<!-- <mass value="0.0066122388678941153989" /> -->
+			<mass value="0.066122388678941153989" />
+			<inertia ixx="6.8894459355149516998e-04" ixy="0"  ixz="0" iyy="1.2166590501427852292e-03" iyz="0" izz="6.3103311382374083454e-04" />
+		</inertial>
+	</link>
+	<link name="femur_3">
+		<visual>
+			<origin xyz="0 0 0.009999999999999995004" rpy="1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/femur.stl"/>
+			</geometry>
+			<material name="femur_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.009999999999999995004" rpy="1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/femur.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.026510642456918004362 0 0" rpy="0 0 0"/>
+			<!-- <mass value="0.013450238867894117462" /> -->
+			<mass value="0.13450238867894117462" />
+			<inertia ixx="2.1649254300340447321e-03" ixy="0"  ixz="0" iyy="9.0512478346558147629e-03" iyz="0" izz="7.3700503904704461167e-03" />
+		</inertial>
+	</link>
+	<link name="tibia_3">
+		<visual>
+			<origin xyz="0 0 -0.015000000000000006384" rpy="-1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/tibia.stl"/>
+			</geometry>
+			<material name="tibia_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 -0.015000000000000006384" rpy="-1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/tibia.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.051011411235233193595 0 -0.01500000000000000118" rpy="0 0 0"/>
+			<!-- <mass value="0.021572830399235441018" /> -->
+			<mass value="0.21572830399235441018" />
+			<inertia ixx="1.5794660713525416071e-03" ixy="0"  ixz="0" iyy="3.1487609853315266437e-03" iyz="0" izz="3.0675812978539347101e-03" />
+		</inertial>
+	</link>
+	<joint name="leg3_tibia" type="revolute">
+		<origin xyz="-0.06500000000000000222 0 -0.015000000000000020262" rpy="-3.1415926535897700234 0 0" />
+		<parent link="femur_3" />
+		<child link="tibia_3" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-2.6179938779914944114" upper="2.6179938779914944114"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<joint name="leg3_femur" type="revolute">
+		<origin xyz="-0.018749999999999995837 0 0" rpy="-1.570796326794896558 0 0" />
+		<parent link="coxa_3" />
+		<child link="femur_3" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-1.570796326794896558" upper="1.570796326794896558"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<joint name="leg3_coxa" type="revolute">
+		<origin xyz="0.070000000000000103806 -0.034999999999999975575 -0.0099999999999996706107" rpy="3.1415926535897917837 0 1.5707963267949081043" />
+		<parent link="base_link" />
+		<child link="coxa_3" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-0.69813170079773179122" upper="0.69813170079773179122"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<link name="coxa_4">
+		<visual>
+			<origin xyz="0 0 0.0099999999999999984734" rpy="-3.141592653589793116 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/coxa.stl"/>
+			</geometry>
+			<material name="coxa_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.0099999999999999984734" rpy="-3.141592653589793116 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/coxa.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.0098878038941457493255 0 0" rpy="0 0 0"/>
+			<!-- <mass value="0.0066122388678941153989" /> -->
+			<mass value="0.066122388678941153989" />
+			<inertia ixx="6.8894459355149516998e-04" ixy="0"  ixz="0" iyy="1.2166590501427852292e-03" iyz="7.7958524123792515929e-38" izz="6.3103311382374083454e-04" />
+		</inertial>
+	</link>
+	<link name="femur_4">
+		<visual>
+			<origin xyz="0 0 0.009999999999999995004" rpy="1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/femur.stl"/>
+			</geometry>
+			<material name="femur_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.009999999999999995004" rpy="1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/femur.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.026510642456918004362 0 -8.6736173798840724499e-18" rpy="0 0 0"/>
+			<!-- <mass value="0.013450238867894117462" /> -->
+			<mass value="0.13450238867894117462" />
+			<inertia ixx="2.1649254300340447321e-03" ixy="0"  ixz="0" iyy="9.0512478346558147629e-03" iyz="0" izz="7.3700503904704461167e-03" />
+		</inertial>
+	</link>
+	<link name="tibia_4">
+		<visual>
+			<origin xyz="0 0 -0.015" rpy="-1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/tibia.stl"/>
+			</geometry>
+			<material name="tibia_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 -0.015" rpy="-1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/tibia.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.051011411235233193595 -1.8960734682219784444e-18 -0.014999999999999994241" rpy="0 0 0"/>
+			<!-- <mass value="0.021572830399235441018" /> -->
+			<mass value="0.21572830399235441018" />
+			<inertia ixx="1.5794660713525416071e-03" ixy="0"  ixz="0" iyy="3.1487609853315266437e-03" iyz="0" izz="3.0675812978539347101e-03" />
+		</inertial>
+	</link>
+	<joint name="leg4_tibia" type="revolute">
+		<origin xyz="-0.065000000000000016098 0 -0.015" rpy="3.1415926535897824579 0 0" />
+		<parent link="femur_4" />
+		<child link="tibia_4" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-2.6179938779914944114" upper="2.6179938779914944114"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<joint name="leg4_femur" type="revolute">
+		<origin xyz="-0.018749999999999995837 0 0" rpy="-1.570796326794896558 0 0" />
+		<parent link="coxa_4" />
+		<child link="femur_4" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-1.570796326794896558" upper="1.570796326794896558"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<joint name="leg4_coxa" type="revolute">
+		<origin xyz="0.070000000000000089928 0.034999999999999371891 -0.0100000000000001147" rpy="-3.1415926535897917837 0 -1.5707963267948972241" />
+		<parent link="base_link" />
+		<child link="coxa_4" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-0.69813170079773179122" upper="0.69813170079773179122"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<link name="coxa_5">
+		<visual>
+			<origin xyz="0 0 0.010000000000000000208" rpy="3.141592653589793116 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/coxa.stl"/>
+			</geometry>
+			<material name="coxa_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.010000000000000000208" rpy="3.141592653589793116 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/coxa.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.0098878038941457493255 0 0" rpy="0 0 0"/>
+			<!-- <mass value="0.0066122388678941153989" /> -->
+			<mass value="0.066122388678941153989" />
+			<inertia ixx="6.8894459355149516998e-04" ixy="0"  ixz="0" iyy="1.2166590501427852292e-03" iyz="0" izz="6.3103311382374083454e-04" />
+		</inertial>
+	</link>
+	<link name="femur_5">
+		<visual>
+			<origin xyz="0 0 0.0099999999999999984734" rpy="1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/femur.stl"/>
+			</geometry>
+			<material name="femur_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.0099999999999999984734" rpy="1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/femur.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.026510642456918004362 1.7833050232840903573e-18 0" rpy="0 0 0"/>
+			<!-- <mass value="0.013450238867894117462" /> -->
+			<mass value="0.13450238867894117462" />
+			<inertia ixx="2.1649254300340447321e-03" ixy="0"  ixz="0" iyy="9.0512478346558147629e-03" iyz="0" izz="7.3700503904704461167e-03" />
+		</inertial>
+	</link>
+	<link name="tibia_5">
+		<visual>
+			<origin xyz="0 0 -0.015" rpy="-1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/tibia.stl"/>
+			</geometry>
+			<material name="tibia_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 -0.015" rpy="-1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/tibia.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.051011411235233193595 -1.6134999224490159944e-19 -0.014999999999999994241" rpy="0 0 0"/>
+			<!-- <mass value="0.021572830399235441018" /> -->
+			<mass value="0.21572830399235441018" />
+			<inertia ixx="1.5794660713525416071e-03" ixy="0"  ixz="0" iyy="3.1487609853315266437e-03" iyz="0" izz="3.0675812978539347101e-03" />
+		</inertial>
+	</link>
+	<joint name="leg5_tibia" type="revolute">
+		<origin xyz="-0.06500000000000000222 0 -0.01500000000000000118" rpy="3.141592653589793116 0 0" />
+		<parent link="femur_5" />
+		<child link="tibia_5" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-2.6179938779914944114" upper="2.6179938779914944114"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<joint name="leg5_femur" type="revolute">
+		<origin xyz="-0.018749999999999995837 -1.8415029557023978118e-19 0" rpy="-1.570796326794896558 0 0" />
+		<parent link="coxa_5" />
+		<child link="femur_5" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-1.570796326794896558" upper="1.570796326794896558"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<joint name="leg5_coxa" type="revolute">
+		<origin xyz="-5.7352654186960304952e-18 0.034999999999999677203 -0.0099999999999999967387" rpy="3.141592653589793116 0 -1.5707963267948970021" />
+		<parent link="base_link" />
+		<child link="coxa_5" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-0.69813170079773179122" upper="0.69813170079773179122"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<link name="coxa_6">
+		<visual>
+			<origin xyz="0 0 0.010000000000000000208" rpy="3.141592653589793116 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/coxa.stl"/>
+			</geometry>
+			<material name="coxa_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.010000000000000000208" rpy="3.141592653589793116 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/coxa.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.0098878038941457493255 0 0" rpy="0 0 0"/>
+			<!-- <mass value="0.0066122388678941153989" /> -->
+			<mass value="0.066122388678941153989" />
+			<inertia ixx="6.8894459355149516998e-04" ixy="0"  ixz="0" iyy="1.2166590501427852292e-03" iyz="0" izz="6.3103311382374083454e-04" />
+		</inertial>
+	</link>
+	<link name="femur_6">
+		<visual>
+			<origin xyz="0 0 0.009999999999999995004" rpy="1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/femur.stl"/>
+			</geometry>
+			<material name="femur_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.009999999999999995004" rpy="1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/femur.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.026510642456918004362 1.7833050232840868906e-18 0" rpy="0 0 0"/>
+			<!-- <mass value="0.013450238867894117462" /> -->
+			<mass value="0.13450238867894117462" />
+			<inertia ixx="2.1649254300340447321e-03" ixy="1.1134806509702657624e-35"  ixz="0" iyy="9.0512478346558147629e-03" iyz="0" izz="7.3700503904704461167e-03" />
+		</inertial>
+	</link>
+	<link name="tibia_6">
+		<visual>
+			<origin xyz="0 0 -0.015" rpy="-1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/tibia.stl"/>
+			</geometry>
+			<material name="tibia_material">
+				<color rgba="0.61568627450980395466 0.81176470588235294379 0.92941176470588238168 1.0"/>
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 -0.015" rpy="-1.570796326794896558 0 0" />
+			<geometry>
+				<mesh filename="file://$(find hexabot)/meshes/tibia.stl"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.051011411235233193595 0 -0.014999999999999994241" rpy="0 0 0"/>
+			<!-- <mass value="0.021572830399235441018" /> -->
+			<mass value="0.21572830399235441018" />
+			<inertia ixx="1.5794660713525416071e-03" ixy="0"  ixz="0" iyy="3.1487609853315266437e-03" iyz="0" izz="3.0675812978539347101e-03" />
+		</inertial>
+	</link>
+	<joint name="leg6_tibia" type="revolute">
+		<origin xyz="-0.065000000000000016098 0 -0.015" rpy="3.1415926535897775729 0 0" />
+		<parent link="femur_6" />
+		<child link="tibia_6" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-2.6179938779914944114" upper="2.6179938779914944114"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<joint name="leg6_femur" type="revolute">
+		<origin xyz="-0.018749999999999988898 0 0" rpy="-1.570796326794896558 0 0" />
+		<parent link="coxa_6" />
+		<child link="femur_6" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-1.570796326794896558" upper="1.570796326794896558"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	<joint name="leg6_coxa" type="revolute">
+		<origin xyz="-0.070000000000000103806 0.034999999999999982514 -0.0099999999999999568401" rpy="3.1415926535897891192 0 -1.5707963267948974462" />
+		<parent link="base_link" />
+		<child link="coxa_6" />
+		<axis xyz="0 0 1"/>
+		<limit effort="1" velocity="20" lower="-0.69813170079773179122" upper="0.69813170079773179122"/>
+		<dynamics damping="1.0" friction="0.1"/>
+	</joint>
+	
+	<gazebo reference = "tibia">
+		<kp>1e5</kp>
+		<kd>100</kd>
+		<mu1>1.5</mu1>
+		<mu2>1.5</mu2>
+		<minDepth>0.002</minDepth>
+		<!-- <fdir1>1 0 0 </fdir1> -->
+	</gazebo>
+
+	<gazebo reference = "tibia_2">
+		<kp>1e5</kp>
+		<kd>100</kd>
+		<mu1>1.5</mu1>
+		<mu2>1.5</mu2>
+		<minDepth>0.002</minDepth>
+		<!-- <fdir1>1 0 0 </fdir1> -->
+	</gazebo>
+
+	<gazebo reference = "tibia_3">
+		<kp>1e5</kp>
+		<kd>100</kd>
+		<mu1>1.5</mu1>
+		<mu2>1.5</mu2>
+		<minDepth>0.002</minDepth>
+		<!-- <fdir1>1 0 0 </fdir1> -->
+	</gazebo>
+
+	<gazebo reference = "tibia_4">
+		<kp>1e5</kp>
+		<kd>100</kd>
+		<mu1>1.5</mu1>
+		<mu2>1.5</mu2>
+		<minDepth>0.002</minDepth>
+		<!-- <fdir1>1 0 0 </fdir1> -->
+	</gazebo>
+
+	<gazebo reference = "tibia_5">
+		<kp>1e5</kp>
+		<kd>100</kd>
+		<mu1>1.5</mu1>
+		<mu2>1.5</mu2>
+		<minDepth>0.002</minDepth>
+		<!-- <fdir1>1 0 0 </fdir1> -->
+	</gazebo>
+
+	<gazebo reference = "tibia_6">
+		<kp>1e5</kp>
+		<kd>100</kd>
+		<mu1>1.5</mu1>
+		<mu2>1.5</mu2>
+		<minDepth>0.002</minDepth>
+		<!-- <fdir1>1 0 0 </fdir1> -->
+	</gazebo>
+
+</robot>
